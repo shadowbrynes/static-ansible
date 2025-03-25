@@ -1,0 +1,27 @@
+- name: Configure Instances
+  hosts: all
+  become: yes
+  tasks:
+    - name: Update and upgrade packages
+      apt:
+        update_cache: yes
+        upgrade: yes
+
+    - name: Install required packages
+      apt:
+        name:
+          - apache2
+          - maven
+          - unzip
+        state: present
+
+    - name: Install SonarQube dependencies
+      apt:
+        name:
+          - openjdk-17-jdk
+          - postgresql
+        state: present
+
+    - name: Enable Ping
+      ping:
+
